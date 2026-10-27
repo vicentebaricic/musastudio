@@ -22,6 +22,8 @@ SRC = {
     "A": "a.jpg",                                      # clienta sonriendo durante el color
     "K": "aditya-sethia-iCJTDyLyP0I-unsplash.jpg",     # corte con cabello húmedo
     "S": "salon-referencia.png",                       # interior de salón (REFERENCIA, no es Musa)
+    "P": "pelo-mojado-perfil.jpg",                     # clienta de perfil con el cabello mojado (subida por Musa)
+    "L": "lavado-toalla.jpg",                          # lavado con toalla en el lavapelo (subida por Musa)
     "M": "fachada-google-maps.jpg",                    # fachada real de Musa Studio (captura de Google Maps, baja resolución)
 }
 
@@ -103,6 +105,8 @@ SHOTS = [
     ("servicios/home-cabello.webp",   "K", (0.00,0.05,1.00,0.85), 4/5, 800),
     ("servicios/home-belleza.webp",   "N", (0.25,0.10,0.75,0.95), 4/5, 800),
     ("servicios/home-bienestar.webp", "F", (0.30,0.05,0.85,1.00), 4/5, 800),
+    ("destacado-perfil.webp",        "P", (0.00,0.12,1.00,1.00), 4/5, 900),
+    ("destacado-lavado.webp",        "L", (0.00,0.00,1.00,1.00), 4/5, 900),
     ("nosotros-01.webp",             "A", (0.00,0.22,1.00,0.95), 4/5, 1100),
     # Galería
     ("galeria/color-01.webp",        "C", (0.38,0.38,0.75,0.75), 1, 1100),
@@ -110,6 +114,8 @@ SHOTS = [
     ("galeria/color-02.webp",        "K", (0.05,0.10,0.95,1.00), 3/5, 800),
     ("galeria/corte-03.webp",        "V3", (0.10,0.0,0.80,1.0), 1, 800),
     ("galeria/unas-01.webp",         "N", (0.32,0.35,0.68,0.70), 1, 800),
+    ("galeria/corte-04.webp",        "P", (0.00,0.20,1.00,0.95), 3/4, 800),
+    ("galeria/lavado-01.webp",       "L", (0.00,0.25,1.00,0.95), 1, 800),
     ("galeria/pestanas-01.webp",     "F", (0.40,0.25,0.85,0.85), 3/5, 800),
 ]
 

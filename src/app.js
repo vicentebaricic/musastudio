@@ -77,12 +77,14 @@ const SERVICES = [
 
 /* Galería — reemplaza con fotos reales (assets/img/galeria/) */
 const GALLERY = [   // una foto por cada original: ninguna se repite
-  { file: "color-01.webp",    cat: "color",  cap: "Aplicación de color con pincel", size: "g-big" },
-  { file: "color-05.webp",    cat: "color",  cap: "Color con diagnóstico",          size: "g-tall" },
-  { file: "unas-01.webp",     cat: "unas",   cap: "Manicure de precisión",          size: "g-tall" },
-  { file: "color-02.webp",    cat: "corte",  cap: "Corte y forma",                  size: "g-tall" },
-  { file: "pestanas-01.webp", cat: "rostro", cap: "Limpieza facial",                size: "" },
-  { file: "corte-03.webp",    cat: "corte",  cap: "Brushing con cepillo redondo",   size: "" }
+  { file: "color-01.webp",    cat: "color",  cap: "Aplicación de color con pincel" },
+  { file: "corte-04.webp",    cat: "corte",  cap: "Antes del corte" },
+  { file: "color-05.webp",    cat: "color",  cap: "Color con diagnóstico" },
+  { file: "unas-01.webp",     cat: "unas",   cap: "Manicure de precisión" },
+  { file: "color-02.webp",    cat: "corte",  cap: "Corte y forma" },
+  { file: "pestanas-01.webp", cat: "rostro", cap: "Limpieza facial" },
+  { file: "corte-03.webp",    cat: "corte",  cap: "Brushing con cepillo redondo" },
+  { file: "lavado-01.webp",   cat: "corte",  cap: "Lavado y tratamiento" }
 ];
 
 /* Equipo — POR CONFIRMAR: nombres, especialidad, días y fotos (assets/img/equipo/<nombre>.webp).
@@ -183,7 +185,7 @@ function wireLinks(root = document){
 function renderGallery(){
   const el = $("#gallery"), preview = el.dataset.preview !== undefined;
   el.innerHTML = GALLERY.map((g, i) => (preview && !g.home) ? "" : `
-    <button class="g-item ${g.size} reveal" type="button" data-cat="${g.cat}" data-index="${i}" aria-label="Ampliar foto: ${esc(g.cap)}">
+    <button class="g-item reveal" type="button" data-cat="${g.cat}" data-index="${i}" aria-label="Ampliar foto: ${esc(g.cap)}">
       ${imgBox("assets/img/galeria/" + g.file, g.cap)}
       <figcaption>${esc(g.cap)}</figcaption>
     </button>`).join("");
@@ -193,7 +195,7 @@ function renderTeam(){
   $("#team").innerHTML = TEAM.map((m, i) => `
     <article class="member reveal" data-delay="${i % 4}">
       <div class="member__photo">
-        ${m.file ? imgBox("assets/img/equipo/" + m.file, `${m.name}, ${m.role}`) : `<div class="ph member__mono"><img src="assets/img/logo-musa-studio.svg" alt="" loading="lazy"></div>`}
+        ${m.file ? imgBox("assets/img/equipo/" + m.file, `${m.name}, ${m.role}`) : `<div class="ph member__mono"><img src="assets/img/monograma.svg" alt="" loading="lazy"></div>`}
         <div class="member__over" id="bio-${i}">
           <p class="member__tag">${esc(m.tagline)}</p>
           <p>${esc(m.bio)}</p>
@@ -662,6 +664,18 @@ function initIgVideo(){
   });
 }
 
+// Barra "Reservar hora / Ver servicios": en escritorio aparece cuando los botones del hero salen de la pantalla
+// (en las páginas internas, al bajar un poco). En móvil está siempre visible.
+function initCtaBar(){
+  const bar = $("#ctaBar"), heroCtas = $(".hero__ctas");
+  if (heroCtas && "IntersectionObserver" in window) {
+    new IntersectionObserver(([e]) => bar.classList.toggle("is-visible", !e.isIntersecting && e.boundingClientRect.top < 0)).observe(heroCtas);
+  } else {
+    const onScroll = () => bar.classList.toggle("is-visible", window.scrollY > 240);
+    onScroll(); window.addEventListener("scroll", onScroll, { passive: true });
+  }
+}
+
 // Reveal on scroll
 function initReveal(){
   const els = $$(".reveal:not(.is-in)");
@@ -693,5 +707,5 @@ run("#reviews", renderReviews); run("#svcList", renderServices); run("#hoursBody
 wireLinks(); watchMedia();
 run(null, initHeader); run(null, initTheme); run("#mnav", initMenu); run("#heroVideo", initHero);
 run("[role=tab]", initTabs); run("#gallery", initGallery); run("#giftForm", initGift); run("#cart", initCart);
-run(".map", initMap); run("#booking", initBooking); run(".ig-video", initIgVideo); run(null, initReveal); run("#toggleSamples", initSamples);
+run("#ctaBar", initCtaBar); run(".map", initMap); run("#booking", initBooking); run(".ig-video", initIgVideo); run(null, initReveal); run("#toggleSamples", initSamples);
 $("#year").textContent = new Date().getFullYear();

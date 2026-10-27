@@ -1,7 +1,7 @@
 # Musa Studio · sitio web
 
 Sitio de **Musa Studio** (peluquería, uñas, pestañas y faciales · Strip Center Club Fama, Chicureo).
-Basado en la estructura del sitio de Glanz, con identidad propia: negro profundo + dorado del logo,
+Basado en la estructura del sitio de Glanz, con identidad propia: negro profundo + champaña del logo,
 tipografías Cormorant Garamond / Jost, modo oscuro por defecto (modo claro marfil/bronce con el botón de la luna).
 
 ## Páginas
@@ -26,16 +26,19 @@ python3 tools/build_pages.py
 - `assets/` tiene las versiones optimizadas que usa el sitio.
 
 ```bash
-pip install potracer && python3 tools/build_wordmark.py   # logo vectorial MUSA STUDIO (SVG dorado y bronce), MUSA del pie, favicon
-NODE_PATH=$(npm root -g) node tools/build_icons.js        # apple-touch-icon.png y og-image.jpg desde el SVG
-python3 tools/build_media.py                               # recortes + grade "Musa" de fotos y video (Pillow, numpy, ffmpeg)
-NODE_PATH=$(npm root -g) node tools/build_products.js     # packshots de la tienda (Playwright) → luego pasar a webp
+pip install potracer && python3 tools/build_logo.py   # logo vectorial (SVG), monograma, favicon, MUSA del pie, og-image
+NODE_PATH=$(npm root -g) node tools/build_icons.js    # apple-touch-icon.png desde el favicon
+python3 tools/build_media.py                           # recortes + grade "Musa" de fotos y video (Pillow, numpy, ffmpeg)
+NODE_PATH=$(npm root -g) node tools/build_products.js # packshots de la tienda (Playwright) → luego pasar a webp
 ```
 
 ### Logo
-El sitio usa solo el texto **MUSA STUDIO** (sin la imagen de la mujer). `build_wordmark.py` toma
-`Media/logo-musa-original.jpg`, recorta las letras y las **vectoriza** (el original mide 534 px y se pixelaba):
-quedan SVG nítidos a cualquier tamaño, en dorado (fondo oscuro) y bronce (fondo claro), más la M del favicon.
+`build_logo.py` toma `Media/logo-musa-nuevo.jpg` (monograma MS + MUSA / STUDIO sobre negro) y lo **vectoriza**:
+SVG nítidos a cualquier tamaño, con MUSA en blanco y STUDIO / monograma en champaña (versión clara para el modo claro).
+
+### Fotos
+Regla: **ninguna foto se repite dentro de una página** (cada original de `Media/` se usa una vez por página;
+se revisa con la lista `SHOTS` de `tools/build_media.py`).
 
 ## Pendiente (marcado en el sitio con etiquetas amarillas)
 
