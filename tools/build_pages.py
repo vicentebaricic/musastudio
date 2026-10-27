@@ -14,6 +14,7 @@ import json, os, re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "src")
 SITE = "https://vicentebaricic.github.io/musastudio/"
+WORDMARK = os.path.join(ROOT, "tools", "musa-wordmark.svg")   # generado por tools/build_wordmark.py
 
 def read(*p):
     with open(os.path.join(SRC, *p), encoding="utf-8") as f:
@@ -37,7 +38,7 @@ def build(name):
     nav = meta.get("nav")
     if nav:
         header = header.replace(f'data-nav="{nav}"', f'data-nav="{nav}" aria-current="page"')
-    footer = read("partials", "footer.html")
+    footer = read("partials", "footer.html").replace("{{wordmark}}", open(WORDMARK, encoding="utf-8").read())
 
     html = (head.rstrip() + "\n<style>\n" + read("styles.css") + "</style>\n</head>\n"
             + f'<body class="{meta.get("bodyClass", "")}">\n'

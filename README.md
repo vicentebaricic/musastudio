@@ -26,15 +26,16 @@ python3 tools/build_pages.py
 - `assets/` tiene las versiones optimizadas que usa el sitio.
 
 ```bash
-python3 tools/build_logo.py                            # versiones web del logo (sin fondo, horizontal, bronce, favicon, og-image)
-python3 tools/build_media.py                           # recortes + grade "Musa" de fotos y video (Pillow, numpy, ffmpeg)
-NODE_PATH=$(npm root -g) node tools/build_products.js  # packshots de la tienda (Playwright) → luego pasar a webp
+pip install potracer && python3 tools/build_wordmark.py   # logo vectorial MUSA STUDIO (SVG dorado y bronce), MUSA del pie, favicon
+NODE_PATH=$(npm root -g) node tools/build_icons.js        # apple-touch-icon.png y og-image.jpg desde el SVG
+python3 tools/build_media.py                               # recortes + grade "Musa" de fotos y video (Pillow, numpy, ffmpeg)
+NODE_PATH=$(npm root -g) node tools/build_products.js     # packshots de la tienda (Playwright) → luego pasar a webp
 ```
 
 ### Logo
-`build_logo.py` toma `Media/logo-musa-original.jpg` (dorado sobre negro), le quita el fondo y genera:
-emblema completo, versión **horizontal** (medallón + MUSA/STUDIO) para el menú, versiones **bronce** para fondo claro,
-la palabra MUSA para el pie, favicon y la imagen para compartir en redes.
+El sitio usa solo el texto **MUSA STUDIO** (sin la imagen de la mujer). `build_wordmark.py` toma
+`Media/logo-musa-original.jpg`, recorta las letras y las **vectoriza** (el original mide 534 px y se pixelaba):
+quedan SVG nítidos a cualquier tamaño, en dorado (fondo oscuro) y bronce (fondo claro), más la M del favicon.
 
 ## Pendiente (marcado en el sitio con etiquetas amarillas)
 

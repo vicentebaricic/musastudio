@@ -233,7 +233,7 @@ function renderTeam(){
   $("#team").innerHTML = TEAM.map((m, i) => `
     <article class="member reveal" data-delay="${i % 4}">
       <div class="member__photo">
-        ${m.file ? imgBox("assets/img/equipo/" + m.file, `${m.name}, ${m.role}`) : `<div class="ph member__mono"><img src="assets/img/medallon.png" alt="" loading="lazy"></div>`}
+        ${m.file ? imgBox("assets/img/equipo/" + m.file, `${m.name}, ${m.role}`) : `<div class="ph member__mono"><img src="assets/img/logo-musa-studio.svg" alt="" loading="lazy"></div>`}
         <div class="member__over" id="bio-${i}">
           <p class="member__tag">${esc(m.tagline)}</p>
           <p>${esc(m.bio)}</p>
