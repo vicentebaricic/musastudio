@@ -1,0 +1,42 @@
+<!--meta {"title":"Servicios · Musa Studio","description":"Todos los servicios de Musa Studio en Chicureo: coloración, corte, tratamientos, brushing, manicure, pedicure, pestañas, cejas y faciales.","nav":"servicios","bodyClass":"page-sub"} -->
+<!-- =================== SERVICIOS (PÁGINA) =================== -->
+<section class="page-head svc-page-head" aria-labelledby="svc-page-title">
+  <div class="container">
+    <p class="crumbs"><a href="./">Inicio</a> / Servicios</p>
+    <div class="section-head section-head--split" style="margin-bottom:0">
+      <div>
+        <p class="eyebrow">Servicios</p>
+        <h1 id="svc-page-title">Todo lo que necesitas, <em>en un solo lugar</em></h1>
+      </div>
+      <p class="lead">Busca tu servicio o elige una categoría. Reserva directamente en AgendaPro. <span class="sample">Precios y duraciones de ejemplo</span></p>
+    </div>
+  </div>
+</section>
+
+<div class="svc-chips" aria-label="Categorías de servicios">
+  <nav class="container svc-chips__inner" id="svcChips"></nav>
+</div>
+
+<div class="container svc-layout">
+  <aside class="svc-aside">
+    <div class="svc-aside__inner">
+      <label class="svc-search">
+        <span class="sr-only">Buscar servicio</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input id="svcSearch" type="search" placeholder="¿Qué servicio buscas?" autocomplete="off">
+      </label>
+      <p class="svc-count" id="svcCount" aria-live="polite"></p>
+      <nav aria-label="Índice de servicios"><ul class="svc-index" id="svcIndex"></ul></nav>
+      <a class="btn btn--accent js-book svc-aside__cta" href="#" target="_blank" rel="noopener">Reservar hora</a>
+    </div>
+  </aside>
+  <div class="svc-main">
+    <div id="svcList"></div>
+    <div class="svc-empty" id="svcEmpty" hidden>
+      <h2>No encontramos ese servicio</h2>
+      <p>Escríbenos y te contamos si lo hacemos o qué nos recomiendas.</p>
+      <a class="btn btn--ghost js-wa" data-wa="servicio" data-name="un servicio" href="#" target="_blank" rel="noopener">Preguntar por WhatsApp</a>
+    </div>
+    <p class="svc-note">¿Buscas promociones o servicios destacados? <a class="link js-book" href="#" target="_blank" rel="noopener">Revísalos en AgendaPro →</a></p>
+  </div>
+</div>

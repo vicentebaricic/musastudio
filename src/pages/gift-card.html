@@ -1,0 +1,62 @@
+<!--meta {"title":"Gift Card · Musa Studio","description":"Regala Musa: gift card electrónica para cualquier servicio o producto, lista para enviar por WhatsApp o correo.","nav":"giftcard","bodyClass":"page-sub"} -->
+<!-- =================== GIFT CARD =================== -->
+<section class="page-head" id="giftcard" aria-labelledby="gift-title" style="padding-bottom:var(--sp-9)">
+  <div class="container gift">
+    <div class="reveal">
+      <p class="crumbs"><a href="./">Inicio</a> / Gift Card</p>
+      <p class="eyebrow">Gift Card</p>
+      <h1 id="gift-title">Regala un momento <em>solo para ella</em></h1>
+      <p class="lead" style="margin:var(--sp-4) 0 var(--sp-6)">Gift card electrónica, lista para enviar por WhatsApp o correo. Válida para cualquier servicio o producto de la tienda.</p>
+      <div class="gcard" aria-live="polite" aria-label="Vista previa de la gift card">
+        <div class="gcard__top">
+          <div class="gcard__brand"><img src="assets/img/logo-horizontal.png" alt="Musa Studio" width="1066" height="400"></div>
+          <div class="gcard__to" id="gcTo">Para: alguien especial</div>
+        </div>
+        <div>
+          <div class="gcard__msg" id="gcMsg">Tu momento, tu esencia, tu mejor versión.</div>
+          <div class="gcard__amount" id="gcAmount">$40.000</div>
+        </div>
+      </div>
+    </div>
+
+    <form class="form reveal" data-delay="1" id="giftForm" novalidate>
+      <fieldset class="field" style="border:0;padding:0;margin:0">
+        <legend>Monto <span class="sample">Montos de ejemplo</span></legend>
+        <div class="amounts" id="gcAmounts">
+          <label><input type="radio" name="amount" value="25000"><span>$25.000</span></label>
+          <label><input type="radio" name="amount" value="40000" checked><span>$40.000</span></label>
+          <label><input type="radio" name="amount" value="60000"><span>$60.000</span></label>
+          <label><input type="radio" name="amount" value="100000"><span>$100.000</span></label>
+        </div>
+      </fieldset>
+      <div class="grid-2">
+        <div class="field">
+          <label for="gcFrom">De (tu nombre) *</label>
+          <input class="input" id="gcFromIn" name="from" autocomplete="name" required aria-describedby="gcFromErr">
+          <span class="err" id="gcFromErr" role="alert"></span>
+        </div>
+        <div class="field">
+          <label for="gcToIn">Para *</label>
+          <input class="input" id="gcToIn" name="to" required aria-describedby="gcToErr">
+          <span class="err" id="gcToErr" role="alert"></span>
+        </div>
+      </div>
+      <div class="field">
+        <label for="gcEmail">Correo de quien la recibe</label>
+        <input class="input" id="gcEmail" name="email" type="email" autocomplete="off" inputmode="email" aria-describedby="gcEmailHelp gcEmailErr">
+        <small id="gcEmailHelp">Opcional. Si lo dejas vacío, te la enviamos a ti por WhatsApp.</small>
+        <span class="err" id="gcEmailErr" role="alert"></span>
+      </div>
+      <div class="field">
+        <label for="gcMsgIn">Mensaje (opcional)</label>
+        <textarea class="input" id="gcMsgIn" name="msg" maxlength="140" aria-describedby="gcMsgHelp"></textarea>
+        <small id="gcMsgHelp">Máximo 140 caracteres.</small>
+      </div>
+      <button class="btn btn--accent" type="submit">
+        Comprar gift card
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+      <p class="muted" style="font-size:var(--fs-xs);margin:0">Al continuar, te contactamos por WhatsApp para coordinar el pago (transferencia o link de pago) y enviarte la gift card en PDF. <span class="sample">Flujo de pago por confirmar</span></p>
+    </form>
+  </div>
+</section>

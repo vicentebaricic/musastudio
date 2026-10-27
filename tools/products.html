@@ -1,0 +1,65 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+/* Packshots de producto para el prototipo (se capturan con tools/build_products.js) */
+body{margin:0;font-family:Georgia,"Times New Roman",serif}
+.shot{width:800px;height:1000px;position:relative;overflow:hidden;
+  background:radial-gradient(120% 90% at 50% 15%, #F7F2EA 0%, #ECE3D6 55%, #DCCDB8 100%)}
+.shot::after{content:"";position:absolute;left:0;right:0;bottom:0;height:300px;background:linear-gradient(#0000,#d9cec1aa)}
+.floor{position:absolute;left:50%;bottom:205px;transform:translateX(-50%);width:480px;height:50px;border-radius:50%;
+  background:radial-gradient(closest-side, rgba(60,45,35,.38), rgba(60,45,35,0));filter:blur(6px);z-index:1}
+.obj{position:absolute;left:50%;bottom:225px;transform:translateX(-50%) scale(1.22);transform-origin:50% 100%;z-index:2}
+.body{position:relative;border-radius:34px 34px 26px 26px;box-shadow:inset -38px 0 60px rgba(0,0,0,.10), inset 26px 0 40px rgba(255,255,255,.35)}
+.body::before{content:"";position:absolute;top:8%;bottom:8%;left:16%;width:9%;border-radius:20px;background:linear-gradient(90deg,#fff0,#ffffff70,#fff0)}
+.label{position:absolute;left:0;right:0;text-align:center;letter-spacing:.12em;font-size:21px;line-height:1.25;padding:0 14px}
+.label b{display:block;font-weight:400;letter-spacing:.42em;font-size:18px}
+.label small{display:block;font-family:Helvetica,Arial,sans-serif;font-size:13px;letter-spacing:.14em;margin-top:14px;white-space:nowrap;text-transform:uppercase}
+.label i{display:block;width:40px;height:1px;background:currentColor;margin:16px auto;opacity:.6}
+/* tipos */
+.obj.pump,.obj.spray{transform:translateX(-50%) scale(1.04)}
+.pump .body{width:230px;height:520px}
+.pump .neck{width:70px;height:40px;margin:0 auto;border-radius:8px 8px 0 0}
+.pump .head{width:46px;height:70px;margin:0 auto;border-radius:6px}
+.pump .nozzle{position:absolute;top:8px;left:50%;width:110px;height:24px;border-radius:12px;margin-left:-8px}
+.tube .body{width:200px;height:500px;border-radius:12px 12px 40px 40px;clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
+.tube .cap{width:150px;height:90px;margin:0 auto;border-radius:12px}
+.tube .stack{display:flex;flex-direction:column-reverse}
+.jar .lid{width:330px;height:80px;border-radius:14px 14px 6px 6px;margin:0 auto}
+.jar .body{width:310px;height:200px;margin:0 auto;border-radius:10px 10px 34px 34px}
+.drop .bulb{width:52px;height:110px;margin:0 auto;border-radius:26px 26px 8px 8px}
+.drop .collar{width:96px;height:56px;margin:0 auto;border-radius:6px}
+.drop .body{width:200px;height:300px;border-radius:36px 36px 26px 26px}
+.spray .cap{width:140px;height:120px;margin:0 auto;border-radius:30px 30px 6px 6px}
+.spray .body{width:190px;height:470px;border-radius:20px 20px 26px 26px}
+</style></head><body>
+<div id="out"></div>
+<script>
+const P = {
+  cream:{body:"#F4EEE4",ink:"#141210",cap:"#B8934A"},
+  ink:{body:"#151311",ink:"#D9B66E",cap:"#B8934A"},
+  mauve:{body:"#1E1B18",ink:"#E2C27F",cap:"#141210"},
+  sand:{body:"#E3D3BB",ink:"#141210",cap:"#141210"},
+  amber:{body:"#A27B3A",ink:"#FBF3E2",cap:"#141210"},
+  lilac:{body:"#2A2622",ink:"#D9B66E",cap:"#C9A55C"},
+};
+const items = [
+  ["shampoo-hidratante","pump","cream","Shampoo","Hidratante · 300 ml"],
+  ["acondicionador","pump","sand","Acondicionador","Hidratante · 300 ml"],
+  ["crema-peinar","tube","mauve","Crema de peinar","Anti frizz · 200 ml"],
+  ["mascarilla","jar","ink","Mascarilla","Reparadora · 250 ml"],
+  ["aceite-argan","drop","amber","Aceite capilar","Argán · 50 ml"],
+  ["protector-termico","spray","cream","Protector","Térmico · 150 ml"],
+  ["shampoo-matizador","pump","lilac","Shampoo","Matizador · 300 ml"],
+  ["crema-manos","tube","sand","Crema de manos","Cutículas · 75 ml"],
+];
+const lab = (c,t,s,top) => `<div class="label" style="color:${c.ink};top:${top}"><b>MUSA</b><i></i>${t.replace(/ /g,"&nbsp;").replace("&nbsp;de&nbsp;"," de ")}<small>${s}</small></div>`;
+document.getElementById("out").innerHTML = items.map(([id,type,pal,t,s]) => {
+  const c=P[pal]; let o="";
+  if(type==="pump") o=`<div class="nozzle" style="background:${c.cap}"></div><div class="head" style="background:${c.cap}"></div><div class="neck" style="background:${c.cap}"></div><div class="body" style="background:${c.body}">${lab(c,t,s,"38%")}</div>`;
+  if(type==="tube") o=`<div class="body" style="background:${c.body}">${lab(c,t,s,"30%")}</div><div class="cap" style="background:${c.cap}"></div>`;
+  if(type==="jar") o=`<div class="lid" style="background:${c.cap}"></div><div class="body" style="background:${c.body}">${lab(c,t,s,"18%")}</div>`;
+  if(type==="drop") o=`<div class="bulb" style="background:${c.cap}"></div><div class="collar" style="background:#C9B79F"></div><div class="body" style="background:${c.body}">${lab(c,t,s,"24%")}</div>`;
+  if(type==="spray") o=`<div class="cap" style="background:${c.cap};box-shadow:inset -20px 0 30px rgba(0,0,0,.08)"></div><div class="body" style="background:${c.body}">${lab(c,t,s,"30%")}</div>`;
+  return `<div class="shot" id="${id}"><div class="floor"></div><div class="obj ${type}">${o}</div></div>`;
+}).join("");
+</script></body></html>
