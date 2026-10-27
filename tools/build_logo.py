@@ -8,7 +8,7 @@ y se arman las variantes que usa el sitio:
     assets/img/logo-horizontal.png     medallón + MUSA / STUDIO en línea, dorado — header sobre fondo oscuro
     assets/img/logo-horizontal-oscuro.png  lo mismo en bronce, para fondos claros
     assets/img/medallon.png            solo la musa (rostro), dorado
-    assets/img/musa-wordmark*.png      solo la palabra MUSA (pie de página), dorado y bronce
+    assets/img/musa-wordmark*.png      solo la palabra MUSA: dorado, bronce y blanco (pie de página)
     assets/img/favicon.png, apple-touch-icon.png, og-image.jpg
 
 Uso: python3 tools/build_logo.py   (requiere Pillow y numpy)
@@ -82,6 +82,10 @@ if __name__ == "__main__":
     save(medal, "medallon.png")
     save(musa, "musa-wordmark.png")
     save(recolor(musa), "musa-wordmark-oscuro.png")
+    # MUSA en blanco para el pie: alfa con umbral para limpiar el ruido del JPG en los bordes
+    w = np.asarray(musa).astype(np.float32)
+    al = np.clip((w[..., 3] / 255.0 - 0.18) / 0.62, 0, 1) ** 0.9
+    save(Image.fromarray(np.dstack([np.full(al.shape + (3,), 255.0), al * 255]).astype(np.uint8), "RGBA"), "musa-wordmark-blanco.png")
 
     # 3) Horizontal: medallón a la izquierda, MUSA / STUDIO a la derecha (para el header)
     H = medal.height

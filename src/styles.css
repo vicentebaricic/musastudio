@@ -661,7 +661,8 @@ textarea.input{min-height:96px;resize:vertical}
 .footer a{text-decoration:none}
 .footer a:hover{text-decoration:underline}
 .footer__mark{display:flex;justify-content:center;margin-top:var(--sp-8);user-select:none}
-.footer__mark img{width:min(100%, 980px);height:auto}
+.footer__mark img{width:min(100%, 980px);height:auto}  /* MUSA en blanco */
+:root[data-theme="light"] .footer__mark img{filter:brightness(0)}                  /* en modo claro, en negro para que se lea */
 .footer__bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--sp-4);margin-top:var(--sp-7);padding-top:var(--sp-5);border-top:1px solid var(--c-line);color:var(--c-muted)}
 .text-btn{background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;color:inherit;font-size:inherit}
 
