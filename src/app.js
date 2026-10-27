@@ -240,7 +240,7 @@ function renderTeam(){
           ${m.sample ? `<a class="js-book" href="#" target="_blank" rel="noopener">Reservar hora →</a>` : `<a class="js-wa" data-wa="equipo" data-name="${esc(m.name)}" href="#" target="_blank" rel="noopener">Agendar con ${esc(m.name)} →</a>`}
         </div>
       </div>
-      <h3>${esc(m.name)} ${m.sample ? sampleBadge("Por confirmar") : ""}</h3>
+      <h3>${esc(m.name)}</h3>
       <p class="role">${esc(m.role)}</p>
       <p class="member__days">${esc(m.days)}</p>
       <button class="member__more" type="button" aria-expanded="false" aria-controls="bio-${i}">Ver perfil</button>
