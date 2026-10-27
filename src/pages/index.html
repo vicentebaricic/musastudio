@@ -29,17 +29,6 @@
     </div>
   </div>
 </section>
-<!-- =================== SPLIT EDITORIAL =================== -->
-<div class="split" aria-label="Destacados">
-  <a class="split__item reveal" href="trabajos.html">
-    <div class="ph" data-file="assets/img/destacado-cabello.webp"><img src="assets/img/destacado-cabello.webp" alt="Estilista dando ondas al cabello de una clienta" loading="lazy" width="900" height="1125"></div>
-    <div class="split__cap"><h2>Cabello que te hace sentir tú</h2><span>Ver trabajos</span></div>
-  </a>
-  <a class="split__item reveal" data-delay="1" href="servicios.html">
-    <div class="ph" data-file="assets/img/destacado-corte.webp"><img src="assets/img/destacado-corte.webp" alt="Corte de cabello con la clienta mirando al espejo" loading="lazy" width="900" height="1125"></div>
-    <div class="split__cap"><h2>Cortes con intención</h2><span>Ver servicios</span></div>
-  </a>
-</div>
 <!-- =================== NOSOTROS =================== -->
 <section class="section" id="nosotros" aria-labelledby="about-title">
   <div class="container">
@@ -56,7 +45,6 @@
       </div>
       <div class="about__media">
         <div class="ph a1 reveal" data-file="assets/img/nosotros-01.webp"><img src="assets/img/nosotros-01.webp" alt="Clienta sonriendo mientras la estilista le aplica color" loading="lazy" width="880" height="1100"></div>
-        <div class="ph a2 reveal" data-delay="1" data-file="assets/img/nosotros-02.webp"><img src="assets/img/nosotros-02.webp" alt="Manicure de precisión con herramientas esterilizadas" loading="lazy" width="525" height="700"></div>
       </div>
     </div>
 
@@ -99,16 +87,14 @@
 
 <!-- =================== TRABAJOS (VISTA PREVIA) =================== -->
 <section class="section" id="trabajos" aria-labelledby="gal-title">
-  <div class="container">
-    <div class="section-head section-head--split">
-      <div class="reveal">
-        <p class="eyebrow">Nuestros trabajos</p>
-        <h2 class="h2" id="gal-title">Resultados reales, <em>de clientas reales</em></h2>
-      </div>
-      <p class="lead reveal" data-delay="1">Color, cortes, uñas, pestañas y rostro. Una muestra de lo que hacemos cada semana. <span class="sample">Fotos de referencia</span></p>
+  <div class="container feature">
+    <div class="reveal">
+      <p class="eyebrow">Nuestros trabajos</p>
+      <h2 class="h2" id="gal-title">Resultados reales, <em>de clientas reales</em></h2>
+      <p class="lead" style="margin-top:var(--sp-4)">Color, cortes, uñas, pestañas y rostro. Una muestra de lo que hacemos cada semana. <span class="sample">Fotos de referencia</span></p>
+      <a class="btn btn--ghost" href="trabajos.html" style="margin-top:var(--sp-3)">Ver todos los trabajos →</a>
     </div>
-    <div class="gallery" id="gallery" data-preview><!-- JS --></div>
-    <div class="more-row reveal"><a class="btn btn--ghost" href="trabajos.html">Ver todos los trabajos y antes / después →</a></div>
+    <a class="ph feature__img reveal" data-delay="1" data-file="assets/img/destacado-color.webp" href="trabajos.html" aria-label="Ver trabajos"><img src="assets/img/destacado-color.webp" alt="Aplicación de color con pincel" loading="lazy" width="900" height="1125"></a>
   </div>
 </section>
 <!-- =================== EL SALÓN =================== -->
@@ -149,26 +135,9 @@
 <section class="ig" aria-labelledby="ig-title">
   <div class="ig__head container reveal">
     <h2 class="sr-only" id="ig-title">Instagram</h2>
-    <p>Síguenos en <a class="js-ig" href="#" target="_blank" rel="noopener">@musastudiocl</a> <span class="sample">Posts de ejemplo</span></p>
+    <p>Síguenos en <a class="js-ig" href="#" target="_blank" rel="noopener">@musastudiocl</a></p>
   </div>
-  <div class="ig__grid">
-    <a class="ig__post js-ig reveal" href="#" target="_blank" rel="noopener">
-      <div class="ph" data-file="assets/img/instagram/post-01.webp"><img src="assets/img/instagram/post-01.webp" alt="Aplicación de color con pincel y papel" loading="lazy" width="720" height="900"></div>
-      <svg class="ig__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
-      <p class="ig__title"><small>Color</small>Luz que se ve natural</p>
-    </a>
-    <a class="ig__post js-ig reveal" data-delay="1" href="#" target="_blank" rel="noopener">
-      <video class="ig-video" muted loop playsinline preload="none" poster="assets/img/instagram/post-02.jpg" aria-hidden="true"><source src="assets/video/hero-mobile.mp4" type="video/mp4"></video>
-      <span class="ig__play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5l12 7-12 7z"/></svg></span>
-      <svg class="ig__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
-      <p class="ig__title"><small>Reel</small>Brushing de la semana</p>
-    </a>
-    <a class="ig__post js-ig reveal" data-delay="2" href="#" target="_blank" rel="noopener">
-      <div class="ph" data-file="assets/img/instagram/post-03.webp"><img src="assets/img/instagram/post-03.webp" alt="Estilista separando mechas con pinzas" loading="lazy" width="720" height="900"></div>
-      <svg class="ig__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
-      <p class="ig__title"><small>Detrás de escena</small>Así nace tu color</p>
-    </a>
-  </div>
+  <div class="container" style="text-align:center"><a class="btn btn--ghost js-ig" href="#" target="_blank" rel="noopener">Ver nuestro Instagram</a></div>
 </section>
 <!-- =================== RESEÑAS =================== -->
 <section class="section section--alt" id="resenas" aria-labelledby="rev-title">
@@ -240,7 +209,6 @@
 </section>
 <!-- =================== CTA FINAL =================== -->
 <section class="cta-band" aria-labelledby="cta-title">
-  <div class="ph" data-file="assets/img/espacio/cta.webp"><img src="assets/img/espacio/cta.webp" alt="" loading="lazy" width="1600" height="900"></div>
   <div class="container">
     <h2 id="cta-title" class="reveal">Tu momento te está <em>esperando.</em></h2>
     <p class="reveal" data-delay="1" style="max-width:46ch;opacity:.9">Elige tu servicio, tu profesional y tu hora. Reserva online en menos de un minuto.</p>

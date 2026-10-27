@@ -76,26 +76,13 @@ const SERVICES = [
 ];
 
 /* Galería — reemplaza con fotos reales (assets/img/galeria/) */
-const GALLERY = [
-  { home: true, file: "corte-01.webp",    cat: "corte",    cap: "Ondas sueltas",                size: "g-big" },
-  { home: true, file: "color-01.webp",    cat: "color",    cap: "Aplicación de color con pincel", size: "" },
-  { home: true, file: "pestanas-01.webp", cat: "rostro",   cap: "Limpieza facial",              size: "g-tall" },
-  { home: true, file: "unas-01.webp",     cat: "unas",     cap: "Manicure de precisión",        size: "" },
-  { file: "color-02.webp",    cat: "corte",    cap: "Corte y forma",                size: "g-tall" },
-  { file: "unas-02.webp",     cat: "unas",     cap: "Esmaltado nude",               size: "g-wide" },
-  { home: true, file: "corte-03.webp",    cat: "corte",    cap: "Brushing con cepillo redondo", size: "" },
-  { file: "color-04.webp",    cat: "color",    cap: "Mechas con papel",             size: "" },
-  { file: "corte-02.webp",    cat: "corte",    cap: "Ondas con tenaza",             size: "" },
-  { home: true, file: "color-03.webp",    cat: "color",    cap: "Rubio luminoso",               size: "" },
-  { file: "pestanas-02.webp", cat: "rostro",   cap: "Masaje facial",                size: "" },
-  { file: "unas-03.webp",     cat: "unas",     cap: "Cuidado de cutículas",         size: "" }
-];
-
-/* Antes / después — assets/img/antes-despues/ */
-const BEFORE_AFTER = [
-  { title: "Color y ondas",   note: "Balayage + brushing",   before: "color-antes.webp",  after: "color-despues.webp" },
-  { title: "Limpieza facial", note: "Limpieza + hidratación", before: "facial-antes.webp", after: "facial-despues.webp" },
-  { title: "Uñas",            note: "Manicure + esmaltado permanente",   before: "unas-antes.webp",   after: "unas-despues.webp" }
+const GALLERY = [   // una foto por cada original: ninguna se repite
+  { file: "color-01.webp",    cat: "color",  cap: "Aplicación de color con pincel", size: "g-big" },
+  { file: "color-05.webp",    cat: "color",  cap: "Color con diagnóstico",          size: "g-tall" },
+  { file: "unas-01.webp",     cat: "unas",   cap: "Manicure de precisión",          size: "g-tall" },
+  { file: "color-02.webp",    cat: "corte",  cap: "Corte y forma",                  size: "g-tall" },
+  { file: "pestanas-01.webp", cat: "rostro", cap: "Limpieza facial",                size: "" },
+  { file: "corte-03.webp",    cat: "corte",  cap: "Brushing con cepillo redondo",   size: "" }
 ];
 
 /* Equipo — POR CONFIRMAR: nombres, especialidad, días y fotos (assets/img/equipo/<nombre>.webp).
@@ -200,33 +187,6 @@ function renderGallery(){
       ${imgBox("assets/img/galeria/" + g.file, g.cap)}
       <figcaption>${esc(g.cap)}</figcaption>
     </button>`).join("");
-}
-
-function renderBA(){
-  const knob = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg>`;
-  $("#baGrid").innerHTML = BEFORE_AFTER.map((b, i) => `
-    <div class="ba reveal" data-delay="${i}">
-      <figure>
-        <div class="ba__frame">
-          ${imgBox("assets/img/antes-despues/" + b.before, "Antes: " + b.title, "ba__before")}
-          ${imgBox("assets/img/antes-despues/" + b.after, "Después: " + b.title, "ba__after")}
-          <span class="ba__label ba__label--b" aria-hidden="true">Antes</span>
-          <span class="ba__label ba__label--a" aria-hidden="true">Después</span>
-          <span class="ba__line" aria-hidden="true"></span>
-          <input class="ba__range" type="range" min="0" max="100" value="50" step="1" aria-label="Comparar antes y después: ${esc(b.title)}" aria-valuetext="50% antes">
-          <span class="ba__knob" aria-hidden="true">${knob}</span>
-        </div>
-        <figcaption><strong>${esc(b.title)}</strong><span>${esc(b.note)}</span></figcaption>
-      </figure>
-    </div>`).join("");
-  $$(".ba__range").forEach(r => {
-    const frame = r.closest(".ba__frame");
-    const set = () => {
-      frame.style.setProperty("--pos", r.value + "%");
-      r.setAttribute("aria-valuetext", `${r.value}% antes, ${100 - r.value}% después`);
-    };
-    r.addEventListener("input", set); set();
-  });
 }
 
 function renderTeam(){
@@ -728,7 +688,7 @@ function initSamples(){
    ============================================================ */
 // Cada bloque corre solo si su sección existe en la página actual
 const run = (sel, fn) => { if (!sel || $(sel)) fn(); };
-run("#gallery", renderGallery); run("#baGrid", renderBA); run("#team", renderTeam);
+run("#gallery", renderGallery); run("#team", renderTeam);
 run("#reviews", renderReviews); run("#svcList", renderServices); run("#hoursBody", renderHours); run("#shop", renderShop);
 wireLinks(); watchMedia();
 run(null, initHeader); run(null, initTheme); run("#mnav", initMenu); run("#heroVideo", initHero);

@@ -332,6 +332,7 @@ html.hide-samples .sample{display:none}
 .about__years span{font-size:var(--fs-sm);color:var(--c-muted);max-width:18ch;line-height:1.35}
 .about__media{display:grid;grid-template-columns:repeat(6,1fr);gap:var(--sp-4);align-items:end}
 .about__media .a1{grid-column:1 / span 4;aspect-ratio:4/5}
+.about__media .a1:only-child{grid-column:2 / span 5}
 .about__media .a2{grid-column:5 / span 2;aspect-ratio:3/4;margin-bottom:12%}
 .about__media figcaption{grid-column:5 / span 2;font-size:var(--fs-xs);color:var(--c-muted);align-self:start;margin-top:calc(-12% + var(--sp-2))}
 .pillars{display:grid;gap:var(--sp-5);margin-top:var(--sp-8);counter-reset:p}
@@ -388,7 +389,7 @@ html.hide-samples .sample{display:none}
 .gallery{
   display:grid;gap:var(--sp-2);grid-template-columns:repeat(2,1fr);grid-auto-flow:dense;grid-auto-rows:minmax(140px, 22vw);
 }
-@media (min-width: 700px){ .gallery{grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(160px, 15vw)} }
+@media (min-width: 700px){ .gallery{grid-template-columns:repeat(3,1fr);grid-auto-rows:minmax(160px, 20vw)} }
 @media (min-width: 1240px){ .gallery{grid-template-columns:repeat(6,1fr);grid-auto-rows:150px} }
 .g-item{position:relative;border-radius:var(--radius-m);overflow:hidden;cursor:zoom-in;border:0;padding:0;background:var(--c-surface)}
 .g-item .ph{position:absolute;inset:0}
@@ -565,6 +566,12 @@ html.hide-samples .sample{display:none}
 .map__card span{font-size:var(--fs-sm);color:var(--c-muted)}
 .map__card .map__cta{margin-left:auto;font-weight:600;color:var(--c-accent-ink);border-bottom:1px solid currentColor}
 .btn-row{display:flex;flex-wrap:wrap;gap:var(--sp-3)}
+/* Bloque texto + una foto (vista previa de trabajos en la portada) */
+.feature{display:grid;gap:var(--sp-6);align-items:center}
+@media (min-width:900px){ .feature{grid-template-columns:1fr 1fr;gap:var(--sp-8)} }
+.feature__img{display:block;aspect-ratio:4/5;max-height:80vh}
+.feature__img img{transition:transform 1.2s var(--ease-out)}
+.feature__img:hover img{transform:scale(1.03)}
 .storefront{margin:0 0 var(--sp-5);max-width:440px}
 .storefront .ph{aspect-ratio:900/410;border:1px solid var(--c-line)}
 .storefront figcaption{margin-top:var(--sp-2);font-size:var(--fs-xs);color:var(--c-muted)}
@@ -665,7 +672,7 @@ textarea.input{min-height:96px;resize:vertical}
 /* ============================================================
    CTA final + footer
    ============================================================ */
-.cta-band{position:relative;color:#F8F5F0;isolation:isolate;overflow:hidden;background:#0E0D0C}
+.cta-band{position:relative;color:#F8F5F0;isolation:isolate;overflow:hidden;background:radial-gradient(70% 120% at 85% 50%, #2A2113 0%, #0E0D0C 65%);border-top:1px solid rgba(201,165,92,.25)}
 .cta-band .ph{position:absolute;inset:0;z-index:-2;background:#1A1815}
 .cta-band::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg, rgba(8,7,6,.85), rgba(8,7,6,.35))}
 .cta-band .container{padding-block:var(--sp-9);display:grid;gap:var(--sp-5);justify-items:start}
@@ -724,7 +731,7 @@ textarea.input{min-height:96px;resize:vertical}
 /* ============================================================
    INSTAGRAM (posts grandes)
    ============================================================ */
-.ig{padding-block:var(--sp-8) 0}
+.ig{padding-block:var(--sp-8)}
 .ig__head{text-align:center;margin-bottom:var(--sp-6)}
 .ig__head p{font-size:var(--fs-lg);margin:0}
 .ig__head a{font-weight:600}
@@ -1122,26 +1129,13 @@ const SERVICES = [
 ];
 
 /* Galería — reemplaza con fotos reales (assets/img/galeria/) */
-const GALLERY = [
-  { home: true, file: "corte-01.webp",    cat: "corte",    cap: "Ondas sueltas",                size: "g-big" },
-  { home: true, file: "color-01.webp",    cat: "color",    cap: "Aplicación de color con pincel", size: "" },
-  { home: true, file: "pestanas-01.webp", cat: "rostro",   cap: "Limpieza facial",              size: "g-tall" },
-  { home: true, file: "unas-01.webp",     cat: "unas",     cap: "Manicure de precisión",        size: "" },
-  { file: "color-02.webp",    cat: "corte",    cap: "Corte y forma",                size: "g-tall" },
-  { file: "unas-02.webp",     cat: "unas",     cap: "Esmaltado nude",               size: "g-wide" },
-  { home: true, file: "corte-03.webp",    cat: "corte",    cap: "Brushing con cepillo redondo", size: "" },
-  { file: "color-04.webp",    cat: "color",    cap: "Mechas con papel",             size: "" },
-  { file: "corte-02.webp",    cat: "corte",    cap: "Ondas con tenaza",             size: "" },
-  { home: true, file: "color-03.webp",    cat: "color",    cap: "Rubio luminoso",               size: "" },
-  { file: "pestanas-02.webp", cat: "rostro",   cap: "Masaje facial",                size: "" },
-  { file: "unas-03.webp",     cat: "unas",     cap: "Cuidado de cutículas",         size: "" }
-];
-
-/* Antes / después — assets/img/antes-despues/ */
-const BEFORE_AFTER = [
-  { title: "Color y ondas",   note: "Balayage + brushing",   before: "color-antes.webp",  after: "color-despues.webp" },
-  { title: "Limpieza facial", note: "Limpieza + hidratación", before: "facial-antes.webp", after: "facial-despues.webp" },
-  { title: "Uñas",            note: "Manicure + esmaltado permanente",   before: "unas-antes.webp",   after: "unas-despues.webp" }
+const GALLERY = [   // una foto por cada original: ninguna se repite
+  { file: "color-01.webp",    cat: "color",  cap: "Aplicación de color con pincel", size: "g-big" },
+  { file: "color-05.webp",    cat: "color",  cap: "Color con diagnóstico",          size: "g-tall" },
+  { file: "unas-01.webp",     cat: "unas",   cap: "Manicure de precisión",          size: "g-tall" },
+  { file: "color-02.webp",    cat: "corte",  cap: "Corte y forma",                  size: "g-tall" },
+  { file: "pestanas-01.webp", cat: "rostro", cap: "Limpieza facial",                size: "" },
+  { file: "corte-03.webp",    cat: "corte",  cap: "Brushing con cepillo redondo",   size: "" }
 ];
 
 /* Equipo — POR CONFIRMAR: nombres, especialidad, días y fotos (assets/img/equipo/<nombre>.webp).
@@ -1246,33 +1240,6 @@ function renderGallery(){
       ${imgBox("assets/img/galeria/" + g.file, g.cap)}
       <figcaption>${esc(g.cap)}</figcaption>
     </button>`).join("");
-}
-
-function renderBA(){
-  const knob = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg>`;
-  $("#baGrid").innerHTML = BEFORE_AFTER.map((b, i) => `
-    <div class="ba reveal" data-delay="${i}">
-      <figure>
-        <div class="ba__frame">
-          ${imgBox("assets/img/antes-despues/" + b.before, "Antes: " + b.title, "ba__before")}
-          ${imgBox("assets/img/antes-despues/" + b.after, "Después: " + b.title, "ba__after")}
-          <span class="ba__label ba__label--b" aria-hidden="true">Antes</span>
-          <span class="ba__label ba__label--a" aria-hidden="true">Después</span>
-          <span class="ba__line" aria-hidden="true"></span>
-          <input class="ba__range" type="range" min="0" max="100" value="50" step="1" aria-label="Comparar antes y después: ${esc(b.title)}" aria-valuetext="50% antes">
-          <span class="ba__knob" aria-hidden="true">${knob}</span>
-        </div>
-        <figcaption><strong>${esc(b.title)}</strong><span>${esc(b.note)}</span></figcaption>
-      </figure>
-    </div>`).join("");
-  $$(".ba__range").forEach(r => {
-    const frame = r.closest(".ba__frame");
-    const set = () => {
-      frame.style.setProperty("--pos", r.value + "%");
-      r.setAttribute("aria-valuetext", `${r.value}% antes, ${100 - r.value}% después`);
-    };
-    r.addEventListener("input", set); set();
-  });
 }
 
 function renderTeam(){
@@ -1774,7 +1741,7 @@ function initSamples(){
    ============================================================ */
 // Cada bloque corre solo si su sección existe en la página actual
 const run = (sel, fn) => { if (!sel || $(sel)) fn(); };
-run("#gallery", renderGallery); run("#baGrid", renderBA); run("#team", renderTeam);
+run("#gallery", renderGallery); run("#team", renderTeam);
 run("#reviews", renderReviews); run("#svcList", renderServices); run("#hoursBody", renderHours); run("#shop", renderShop);
 wireLinks(); watchMedia();
 run(null, initHeader); run(null, initTheme); run("#mnav", initMenu); run("#heroVideo", initHero);

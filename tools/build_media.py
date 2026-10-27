@@ -90,64 +90,30 @@ def save(img, path, w, q=80):
     img.save(full, "WEBP", quality=q, method=6)
     return img
 
-# (salida, fuente, caja, aspect, ancho)
+# (salida, fuente, caja, aspect, ancho). Regla: cada página usa cada original una sola vez.
+# "G" (ondas con tenaza) ya no se usa: se sacó del sitio.
 SHOTS = [
     # Destacados y nosotros
-    ("destacado-cabello.webp",       "G", (0.25,0.0,0.80,1.0), 4/5, 1400),
     ("destacado-color.webp",         "C", (0.15,0.05,0.80,0.95), 4/5, 1400),
-    ("espacio/salon-01.webp",        "N", (0.20,0.05,0.80,0.95), 4/5, 1100),
-    ("espacio/detalle-01.webp",      "G", (0.70,0.30,1.00,0.95), 3/4, 700),
-    ("espacio/atencion-01.webp",     "G", (0.00,0.05,1.00,0.80), 16/10, 1400),
-    ("espacio/salon-02.webp",        "G", (0.00,0.00,1.00,1.00), 16/9, 1600),
     ("espacio/fachada.webp",         "M", (0.00,0.00,1.00,1.00), None, 900),
-    ("espacio/lavado.webp",          "V9.5", (0.20,0.0,0.80,1.0), 1, 800),
-    ("espacio/recepcion.webp",       "C", (0.20,0.25,0.80,0.75), 7/5, 1000),
-    ("espacio/cta.webp",             "V9.5", (0.00,0.00,1.00,1.00), 16/9, 1800),
     ("espacio/salon-main.webp",      "S", (0.00,0.00,1.00,1.00), 4/3, 1600),
-    ("espacio/salon-espejos.webp",   "S", (0.00,0.02,0.56,0.62), 1, 800),
-    ("espacio/salon-estantes.webp",  "S", (0.57,0.00,0.87,0.50), 1, 800),
-    ("espacio/salon-lounge.webp",    "S", (0.52,0.45,1.00,1.00), 1, 800),
-    ("servicios/cabello-wide.webp",   "G", (0.05,0.10,1.00,0.95), 5/2, 1400),
+    ("servicios/cabello-wide.webp",   "C", (0.00,0.20,1.00,0.80), 5/2, 1400),
     ("servicios/belleza-wide.webp",   "N", (0.00,0.22,1.00,0.80), 5/2, 1400),
     ("servicios/bienestar-wide.webp", "F", (0.00,0.18,1.00,0.80), 5/2, 1400),
-    ("servicios/home-cabello.webp",   "G", (0.30,0.05,0.80,1.00), 4/5, 800),
+    ("servicios/home-cabello.webp",   "K", (0.00,0.05,1.00,0.85), 4/5, 800),
     ("servicios/home-belleza.webp",   "N", (0.25,0.10,0.75,0.95), 4/5, 800),
     ("servicios/home-bienestar.webp", "F", (0.30,0.05,0.85,1.00), 4/5, 800),
-    ("destacado-corte.webp",         "K", (0.00,0.05,1.00,0.85), 4/5, 1400),
     ("nosotros-01.webp",             "A", (0.00,0.22,1.00,0.95), 4/5, 1100),
-    ("nosotros-02.webp",             "N", (0.35,0.30,0.75,0.80), 3/4, 700),
-    ("instagram/post-01.webp",       "C", (0.35,0.28,0.82,0.90), 4/5, 900),
-    ("instagram/post-03.webp",       "A", (0.42,0.12,1.00,0.56), 4/5, 900),
-    # Servicios
-    ("servicios/cabello-01.webp",    "C", (0.20,0.10,0.75,0.90), 3/4, 1000),
-    ("servicios/cabello-02.webp",    "G", (0.30,0.15,0.75,0.75), 1, 700),
-    ("servicios/cabello-03.webp",    "V5", (0.15,0.0,0.75,1.0), 1, 700),
-    ("servicios/belleza-01.webp",    "N", (0.25,0.10,0.75,0.90), 3/4, 1000),
-    ("servicios/belleza-02.webp",    "F", (0.30,0.30,0.85,0.90), 1, 700),
-    ("servicios/belleza-03.webp",    "N", (0.55,0.20,0.90,0.60), 1, 700),
-    ("servicios/bienestar-01.webp",  "F", (0.25,0.00,0.85,1.00), 3/4, 1000),
-    ("servicios/bienestar-02.webp",  "F", (0.25,0.00,0.75,0.55), 1, 700),
-    ("servicios/bienestar-03.webp",  "F", (0.00,0.00,0.40,0.55), 1, 700),
     # Galería
     ("galeria/color-01.webp",        "C", (0.38,0.38,0.75,0.75), 1, 1100),
+    ("galeria/color-05.webp",        "A", (0.42,0.12,1.00,0.56), 4/5, 900),
     ("galeria/color-02.webp",        "K", (0.05,0.10,0.95,1.00), 3/5, 800),
-    ("galeria/color-03.webp",        "V7", (0.0,0.1,1.0,0.9), 16/9, 1000),
-    ("galeria/color-04.webp",        "C", (0.25,0.30,0.72,0.62), 3/2, 800),
-    ("galeria/corte-01.webp",        "G", (0.32,0.15,0.72,0.95), 1, 800),
-    ("galeria/corte-02.webp",        "G", (0.15,0.05,0.50,0.60), 1, 800),
     ("galeria/corte-03.webp",        "V3", (0.10,0.0,0.80,1.0), 1, 800),
     ("galeria/unas-01.webp",         "N", (0.32,0.35,0.68,0.70), 1, 800),
-    ("galeria/unas-02.webp",         "N", (0.10,0.25,0.90,0.80), 2/1, 1100),
-    ("galeria/unas-03.webp",         "N", (0.50,0.15,0.95,0.70), 2/1, 1100),
     ("galeria/pestanas-01.webp",     "F", (0.40,0.25,0.85,0.85), 3/5, 800),
-    ("galeria/pestanas-02.webp",     "F", (0.20,0.05,0.70,0.60), 1, 800),
 ]
 
-BEFORE_AFTER = [
-    ("color",    "G", (0.30,0.10,0.75,1.00), 4/5, 1000),
-    ("facial",   "F", (0.35,0.25,0.85,0.90), 4/3, 900),
-    ("unas",     "N", (0.25,0.25,0.75,0.75), 4/3, 900),
-]
+BEFORE_AFTER = []   # (nombre, fuente, caja, aspect, ancho) — volver a usar cuando haya fotos reales de antes y después
 
 # Equipo: cuando lleguen las fotos reales, súbelas a Media/ y agrégalas aquí, p. ej. {"nombre": "nombre-equipo.jpg"}
 TEAM = {}
@@ -171,7 +137,7 @@ if __name__ == "__main__":
                         "-preset", "slow", "-crf", "27", "-pix_fmt", "yuv420p", "-movflags", "+faststart",
                         os.path.join(ROOT, "assets", "video", name)], check=True)
     # posters: primer cuadro del video ya procesado (mismo look exacto)
-    for name, v in [("hero-poster.jpg", "hero.mp4"), ("hero-poster-mobile.jpg", "hero-mobile.mp4"), ("instagram/post-02.jpg", "hero-mobile.mp4")]:
+    for name, v in [("hero-poster.jpg", "hero.mp4"), ("hero-poster-mobile.jpg", "hero-mobile.mp4")]:
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", "1", "-i", os.path.join(ROOT, "assets", "video", v),
                         "-frames:v", "1", "-q:v", "3", os.path.join(A, name)], check=True)
     print("listo")
