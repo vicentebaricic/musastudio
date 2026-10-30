@@ -36,7 +36,8 @@ const CONFIG = {
 
 /* Servicios — categorías de AgendaPro agrupadas en 3 mundos.
    Precios y duraciones DE EJEMPLO (AgendaPro indica "desde $3.000"): reemplazar con los reales. Agregar servicios = agregar filas.
-   book: link de AgendaPro que abre directo esa categoría (se copia desde AgendaPro). Sin book, abre la agenda general. */
+   book: link de AgendaPro para esa categoría, si algún día AgendaPro lo permite (hoy su URL no cambia por categoría).
+   Sin book se abre la agenda general y la ventana indica qué categoría elegir. */
 const SERVICES = [
   { id: "cabello", name: "Cabello", img: "cabello-wide.webp",
     intro: "Color, corte y cuidado pensados para tu tipo de cabello. Siempre con diagnóstico previo.",
@@ -242,7 +243,7 @@ function renderServices(){
       </div>
       ${c.groups.map(g => `
         <div class="svc-group" id="${c.id}-${g.id}" data-spy="${c.id}" data-sub="${c.id}-${g.id}">
-          <div class="svc-group__head"><h3>${g.name}</h3><a class="link js-book" ${g.book ? `data-book="${esc(g.book)}"` : ""} href="#" target="_blank" rel="noopener">Reservar →</a></div>
+          <div class="svc-group__head"><h3>${g.name}</h3><a class="link js-book" data-hint="${esc(g.name)}" ${g.book ? `data-book="${esc(g.book)}"` : ""} href="#" target="_blank" rel="noopener" aria-label="Reservar ${esc(g.name)}">Reservar →</a></div>
           <ul class="svc-rows">
             ${g.items.map(([n, d, p]) => `<li data-q="${esc(norm(n + " " + g.name + " " + c.name))}"><span class="svc-rows__name">${esc(n)}</span><span class="svc-rows__dur">${esc(d)}</span><span class="svc-rows__price">desde ${clp(p)}</span></li>`).join("")}
           </ul>
@@ -619,7 +620,11 @@ function initBooking(){
   $$(".js-book-ext").forEach(a => a.href = CONFIG.agendapro);
   frame.addEventListener("load", () => { if (frame.src) loading.hidden = true; });
   // Cada botón abre su propio link (p. ej. la categoría "Corte de cabello"); si no tiene, la agenda general
-  const open = (url = CONFIG.agendapro) => {
+  const hint = $("#bookingHint");
+  const open = (url = CONFIG.agendapro, cat = "") => {
+    // AgendaPro no permite abrir una categoría por link: se indica cuál elegir
+    hint.hidden = !cat;
+    if (cat) hint.innerHTML = `En la agenda, elige <strong>${esc(cat)}</strong>.`;
     if (frame.getAttribute("src") !== url) { loading.hidden = false; frame.src = url; }
     $$(".js-book-ext").forEach(a => a.href = url);
     modal.hidden = false; requestAnimationFrame(() => modal.classList.add("is-open"));
@@ -633,7 +638,7 @@ function initBooking(){
   document.addEventListener("click", e => {
     const a = e.target.closest(".js-book");
     if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; // cmd/ctrl+clic: pestaña nueva
-    e.preventDefault(); $("#mnav")?.classList.contains("is-open") && $("#menuClose").click(); open(a.href);
+    e.preventDefault(); $("#mnav")?.classList.contains("is-open") && $("#menuClose").click(); open(a.href, a.dataset.hint || "");
   });
   $("#bookingClose").addEventListener("click", close);
   modal.addEventListener("click", e => { if (e.target === modal) close(); });

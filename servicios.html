@@ -766,6 +766,8 @@ textarea.input{min-height:96px;resize:vertical}
 .booking__head{display:flex;align-items:center;gap:var(--sp-4);padding:var(--sp-3) var(--sp-3) var(--sp-3) var(--sp-5);border-bottom:1px solid var(--c-line)}
 .booking__head h2{font-size:1.5rem;margin-right:auto}
 .booking__head h2,.booking__ext{white-space:nowrap}
+.booking__hint{margin:0;padding:var(--sp-3) var(--sp-5);background:var(--c-surface);border-bottom:1px solid var(--c-line);font-size:var(--fs-sm)}
+.booking__hint strong{color:var(--c-accent-ink);font-weight:600}
 .booking__ext{font-size:var(--fs-xs);font-weight:600;color:var(--c-accent-ink);text-underline-offset:.25em}
 .booking__body{position:relative;flex:1;background:#fff}
 .booking__body iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
@@ -1038,6 +1040,7 @@ textarea.input{min-height:96px;resize:vertical}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
     </div>
+    <p class="booking__hint" id="bookingHint" aria-live="polite" hidden></p>
     <div class="booking__body">
       <p class="booking__loading" aria-live="polite">Cargando agenda…</p>
       <iframe id="bookingFrame" title="Agenda de Musa Studio en AgendaPro" loading="lazy" allow="payment"></iframe>
@@ -1094,7 +1097,8 @@ const CONFIG = {
 
 /* Servicios — categorías de AgendaPro agrupadas en 3 mundos.
    Precios y duraciones DE EJEMPLO (AgendaPro indica "desde $3.000"): reemplazar con los reales. Agregar servicios = agregar filas.
-   book: link de AgendaPro que abre directo esa categoría (se copia desde AgendaPro). Sin book, abre la agenda general. */
+   book: link de AgendaPro para esa categoría, si algún día AgendaPro lo permite (hoy su URL no cambia por categoría).
+   Sin book se abre la agenda general y la ventana indica qué categoría elegir. */
 const SERVICES = [
   { id: "cabello", name: "Cabello", img: "cabello-wide.webp",
     intro: "Color, corte y cuidado pensados para tu tipo de cabello. Siempre con diagnóstico previo.",
@@ -1300,7 +1304,7 @@ function renderServices(){
       </div>
       ${c.groups.map(g => `
         <div class="svc-group" id="${c.id}-${g.id}" data-spy="${c.id}" data-sub="${c.id}-${g.id}">
-          <div class="svc-group__head"><h3>${g.name}</h3><a class="link js-book" ${g.book ? `data-book="${esc(g.book)}"` : ""} href="#" target="_blank" rel="noopener">Reservar →</a></div>
+          <div class="svc-group__head"><h3>${g.name}</h3><a class="link js-book" data-hint="${esc(g.name)}" ${g.book ? `data-book="${esc(g.book)}"` : ""} href="#" target="_blank" rel="noopener" aria-label="Reservar ${esc(g.name)}">Reservar →</a></div>
           <ul class="svc-rows">
             ${g.items.map(([n, d, p]) => `<li data-q="${esc(norm(n + " " + g.name + " " + c.name))}"><span class="svc-rows__name">${esc(n)}</span><span class="svc-rows__dur">${esc(d)}</span><span class="svc-rows__price">desde ${clp(p)}</span></li>`).join("")}
           </ul>
@@ -1677,7 +1681,11 @@ function initBooking(){
   $$(".js-book-ext").forEach(a => a.href = CONFIG.agendapro);
   frame.addEventListener("load", () => { if (frame.src) loading.hidden = true; });
   // Cada botón abre su propio link (p. ej. la categoría "Corte de cabello"); si no tiene, la agenda general
-  const open = (url = CONFIG.agendapro) => {
+  const hint = $("#bookingHint");
+  const open = (url = CONFIG.agendapro, cat = "") => {
+    // AgendaPro no permite abrir una categoría por link: se indica cuál elegir
+    hint.hidden = !cat;
+    if (cat) hint.innerHTML = `En la agenda, elige <strong>${esc(cat)}</strong>.`;
     if (frame.getAttribute("src") !== url) { loading.hidden = false; frame.src = url; }
     $$(".js-book-ext").forEach(a => a.href = url);
     modal.hidden = false; requestAnimationFrame(() => modal.classList.add("is-open"));
@@ -1691,7 +1699,7 @@ function initBooking(){
   document.addEventListener("click", e => {
     const a = e.target.closest(".js-book");
     if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; // cmd/ctrl+clic: pestaña nueva
-    e.preventDefault(); $("#mnav")?.classList.contains("is-open") && $("#menuClose").click(); open(a.href);
+    e.preventDefault(); $("#mnav")?.classList.contains("is-open") && $("#menuClose").click(); open(a.href, a.dataset.hint || "");
   });
   $("#bookingClose").addEventListener("click", close);
   modal.addEventListener("click", e => { if (e.target === modal) close(); });
