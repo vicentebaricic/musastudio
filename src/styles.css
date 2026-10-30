@@ -815,7 +815,7 @@ textarea.input{min-height:96px;resize:vertical}
 .svc-cat__title{position:absolute;left:0;right:0;bottom:0;padding:var(--sp-7) var(--sp-5) var(--sp-4);color:#F8F5F0;background:linear-gradient(transparent, rgba(8,7,6,.7))}
 .svc-cat__title h2{font-size:clamp(2rem, 1.5rem + 2vw, 3rem)}
 .svc-cat__title p{margin:var(--sp-1) 0 0;font-size:var(--fs-sm);opacity:.92;max-width:60ch}
-.svc-group{padding:var(--sp-4) 0 var(--sp-5);border-bottom:1px solid var(--c-line);scroll-margin-top:calc(var(--header-h) + 72px)}
+.svc-group{padding:var(--sp-4) 0 var(--sp-5);border-bottom:1px solid var(--c-line);scroll-margin-top:calc(var(--header-h) + 84px)}
 .svc-group[hidden]{display:none}
 .svc-group__head{display:flex;justify-content:space-between;align-items:baseline;gap:var(--sp-4);margin-bottom:var(--sp-3)}
 .svc-group__head h3{font-family:var(--font-body);font-weight:600;font-size:1.2rem}

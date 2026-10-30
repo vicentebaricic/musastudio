@@ -38,42 +38,48 @@ const CONFIG = {
    Precios y duraciones DE EJEMPLO (AgendaPro indica "desde $3.000"): reemplazar con los reales. Agregar servicios = agregar filas.
    book: link de AgendaPro para esa categoría, si algún día AgendaPro lo permite (hoy su URL no cambia por categoría).
    Sin book se abre la agenda general y la ventana indica qué categoría elegir. */
-const SERVICES = [
+const SERVICES = [   // nombres de grupo = categorías reales de AgendaPro (para que la indicación de la reserva coincida)
   { id: "cabello", name: "Cabello", img: "cabello-wide.webp",
     intro: "Color, corte y cuidado pensados para tu tipo de cabello. Siempre con diagnóstico previo.",
     groups: [
-      { id: "coloracion", name: "Coloración", book: "", items: [
-        ["Tintura raíz", "90 min", 35000], ["Tintura completa", "2 h", 45000], ["Balayage", "3 h", 90000],
-        ["Mechas / babylights", "3 h", 80000], ["Baño de color", "60 min", 30000], ["Matiz", "45 min", 20000] ] },
-      { id: "corte", name: "Corte de cabello", book: "", items: [
+      { id: "cortes", name: "Cortes", book: "", items: [
         ["Corte + lavado + secado", "60 min", 22000], ["Despunte", "30 min", 12000], ["Corte de flequillo", "15 min", 5000],
         ["Corte niños", "30 min", 10000], ["Corte masculino", "30 min", 12000] ] },
+      { id: "color", name: "Color", book: "", items: [
+        ["Tintura raíz", "90 min", 35000], ["Tintura completa", "2 h", 45000], ["Balayage", "3 h", 90000],
+        ["Mechas / babylights", "3 h", 80000], ["Baño de color", "60 min", 30000], ["Matiz", "45 min", 20000] ] },
+      { id: "alisados", name: "Alisados y botox capilares", book: "", items: [
+        ["Alisado / keratina", "3 h", 65000], ["Botox capilar", "2 h", 45000] ] },
       { id: "tratamientos", name: "Tratamientos capilares", book: "", items: [
-        ["Hidratación profunda", "45 min", 25000], ["Nutrición y brillo", "45 min", 28000],
-        ["Reconstrucción", "60 min", 32000], ["Alisado / keratina", "3 h", 65000] ] },
-      { id: "brushing", name: "Brushing y peinados", book: "", items: [
-        ["Brushing", "45 min", 15000], ["Ondas", "45 min", 20000], ["Peinado de evento", "60 min", 32000] ] }
+        ["Hidratación profunda", "45 min", 25000], ["Nutrición y brillo", "45 min", 28000], ["Reconstrucción", "60 min", 32000] ] },
+      { id: "brushing", name: "Brushing, secados, planchados, ondas y peinados", book: "", items: [
+        ["Brushing", "45 min", 15000], ["Secado", "30 min", 10000], ["Planchado", "45 min", 15000],
+        ["Ondas", "45 min", 20000], ["Peinado de evento", "60 min", 32000] ] },
+      { id: "lavado", name: "Lavado", book: "", items: [
+        ["Lavado", "20 min", 6000], ["Lavado + secado", "40 min", 12000] ] }
     ] },
   { id: "unas", name: "Uñas", img: "belleza-wide.webp",
     intro: "Manos y pies impecables, con herramientas esterilizadas y diseños a tu medida.",
     groups: [
-      { id: "manos", name: "Manicure", book: "", items: [
+      { id: "manos", name: "Manos", book: "", items: [
         ["Manicure tradicional", "45 min", 10000], ["Esmaltado permanente", "60 min", 16000],
-        ["Manicure rusa", "90 min", 22000], ["Kapping gel", "90 min", 22000], ["Uñas acrílicas / polygel", "2 h", 30000] ] },
-      { id: "pies", name: "Pedicure", book: "", items: [
-        ["Pedicure spa", "60 min", 22000], ["Pedicure + esmaltado permanente", "75 min", 26000] ] },
-      { id: "otros-unas", name: "Extras", book: "", items: [
-        ["Retiro de esmaltado permanente", "20 min", 5000], ["Reparación de uña", "15 min", 3000], ["Diseño (por uña)", "—", 1500] ] }
+        ["Manicure rusa", "90 min", 22000], ["Kapping gel", "90 min", 22000], ["Uñas acrílicas / polygel", "2 h", 30000],
+        ["Retiro de esmaltado permanente", "20 min", 5000] ] },
+      { id: "pies", name: "Pedicura y podología", book: "", items: [
+        ["Pedicure spa", "60 min", 22000], ["Pedicure + esmaltado permanente", "75 min", 26000], ["Podología", "60 min", 25000] ] }
     ] },
   { id: "rostro", name: "Rostro", img: "bienestar-wide.webp",
-    intro: "Mirada y piel: pestañas, cejas y faciales para verte y sentirte tu mejor versión.",
+    intro: "Mirada, piel y maquillaje para verte y sentirte bien.",
     groups: [
-      { id: "pestanas", name: "Pestañas", book: "", items: [
-        ["Lifting de pestañas", "60 min", 22000], ["Extensiones clásicas", "2 h", 35000], ["Extensiones volumen", "2 h 30 min", 42000], ["Retoque de extensiones", "60 min", 20000] ] },
-      { id: "cejas", name: "Cejas", book: "", items: [
-        ["Diseño de cejas", "30 min", 10000], ["Laminado de cejas", "45 min", 20000], ["Henna de cejas", "45 min", 15000] ] },
-      { id: "faciales", name: "Faciales", book: "", items: [
-        ["Limpieza facial profunda", "75 min", 32000], ["Hidratación facial", "60 min", 28000] ] }
+      { id: "cejas-pestanas", name: "Cejas y pestañas", book: "", items: [
+        ["Lifting de pestañas", "60 min", 22000], ["Extensiones de pestañas", "2 h", 35000],
+        ["Diseño de cejas", "30 min", 10000], ["Laminado de cejas", "45 min", 20000] ] },
+      { id: "faciales", name: "Tratamientos faciales", book: "", items: [
+        ["Limpieza facial profunda", "75 min", 32000], ["Hidratación facial", "60 min", 28000] ] },
+      { id: "maquillaje", name: "Maquillaje", book: "", items: [
+        ["Maquillaje social", "60 min", 30000], ["Maquillaje de novia", "90 min", 60000] ] },
+      { id: "depilacion", name: "Depilación", book: "", items: [
+        ["Rostro completo", "20 min", 10000], ["Axilas", "15 min", 8000], ["Piernas completas", "45 min", 20000] ] }
     ] }
 ];
 
@@ -267,6 +273,12 @@ function renderServices(){
   }, { rootMargin: "-30% 0px -60% 0px" });
   $$(".svc-group, .svc-cat__head", $("#svcList")).forEach(el => { if (!el.dataset.spy) el.dataset.spy = el.closest(".svc-cat").id; io.observe(el); });
   mark(SERVICES[0].id, null);
+  // La lista se arma con JS: si se llega con #categoría, se vuelve a ubicar cuando terminan de cargar fotos y fuentes
+  const target = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+  if (target && target.closest("#svcList")) {
+    const go = () => target.scrollIntoView({ block: "start" });
+    go(); window.addEventListener("load", go, { once: true }); document.fonts && document.fonts.ready.then(go);
+  }
 
   // Buscador
   const input = $("#svcSearch"), empty = $("#svcEmpty");
